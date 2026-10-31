@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Linux System Debugging Tool</title>
+
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <h1>Linux System Debugging Tool</h1>
+        <p>Monitor and analyze Linux processes</p>
+    </header>
+
+
+    <main>
+
+        <!-- INTRODUCTION -->
+
+        <section class="intro">
+
+            <h2>System Debugger Dashboard</h2>
+
+            <p>
+                This application demonstrates process control,
+                system call tracing, CPU register monitoring,
+                memory reading and resource monitoring.
+            </p>
+
+            
+<label for="programSelect">Select Target Process:</label>
+
+<select id="programSelect">
+    <option value="target_program">Default Target Program</option>
+    <option value="ls">List Files (ls)</option>
+    <option value="whoami">Current User (whoami)</option>
+</select>
+
+<button onclick="startDebugger()">
+    Start Debugger
+</button>
+
+<p id="statusMessage">Debugger is ready.</p>
+
+	  
+	    
+        </section>
+
+	<div class="target-process">
+    <h3>Target Process</h3>
+    <p>Name: <strong id="targetName">--</strong></p>
+<p>Program: <strong id="targetProgram">--</strong></p>
+</div>
+        <!-- DASHBOARD CARDS -->
+
+        <section class="dashboard">
+
+            <div class="card">
+                <h3>Process Control</h3>
+                <p id="processStatus">Waiting</p>
+            </div>
+
+
+            <div class="card">
+                <h3>System Calls</h3>
+
+                <p id="syscallCount">0</p>
+
+                <span>
+                    System calls detected
+                </span>
+            </div>
+
+
+            <div class="card">
+                <h3>CPU Registers</h3>
+
+                <p id="registerStatus">
+                    Not Read
+                </p>
+            </div>
+
+
+            <div class="card">
+                <h3>Memory</h3>
+
+                <p id="memoryStatus">
+                    Not Read
+                </p>
+            </div>
+
+
+            <div class="card">
+                <h3>Resources</h3>
+
+                <p id="resourceStatus">
+                    Monitoring
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- RESOURCE DETAILS -->
+
+        <section class="resource-section">
+
+            <h2>System Resource Details</h2>
+
+            <div class="resource-grid">
+
+                <div class="resource-card">
+                    <h3>CPU User Time</h3>
+                    <p id="userTime">--</p>
+                </div>
+
+
+                <div class="resource-card">
+                    <h3>CPU System Time</h3>
+                    <p id="systemTime">--</p>
+                </div>
+
+
+                <div class="resource-card">
+                    <h3>Maximum Memory</h3>
+                    <p id="maxMemory">--</p>
+                </div>
+
+
+                <div class="resource-card">
+                    <h3>Total RAM</h3>
+                    <p id="totalRam">--</p>
+                </div>
+
+
+                <div class="resource-card">
+                    <h3>Free RAM</h3>
+                    <p id="freeRam">--</p>
+                </div>
+
+
+                <div class="resource-card">
+                    <h3>Available RAM</h3>
+                    <p id="availableRam">--</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DEBUGGER OUTPUT -->
+
+        <section class="output">
+
+            <h2>Debugger Summary</h2>
+
+            <pre id="debuggerOutput">Click "Start Debugger" to begin.</pre>
+
+        </section>
+
+<!-- PROCESS INFORMATION -->
+<section class="thread-section">
+    <h2>Process Information</h2>
+
+    <p>Use the process ID of a currently running process.</p>
+
+    <div class="process-info">
+        <p>Parent Process ID (PPID): <strong id="parentPid">--</strong></p>
+        <p>Current Process ID (PID): <strong id="currentPid">--</strong></p>
+        <button type="button" onclick="refreshProcessInfo()">
+            Refresh Process IDs
+        </button>
+        
+<button type="button" onclick="findThreadDemo()">
+    Find thread_demo PID
+</button>
+
+    </div>
+
+    <hr>
+
+    <h2>POSIX Thread Monitor</h2>
+    <p>Enter a running process ID to view its thread IDs.</p>
+
+    <div class="thread-controls">
+        <label for="threadPid">Process ID (PID):</label>
+        <input type="number" id="threadPid"
+               placeholder="Enter PID" min="1">
+
+        <button type="button" onclick="loadThreads()">
+            View Threads
+        </button>
+    </div>
+
+    <button type="button" onclick="useCurrentPid()">
+        Use Current Process PID
+    </button>
+
+    <p id="threadStatus">Waiting for a process ID.</p>
+    <pre id="threadOutput">Thread information will appear here.</pre>
+</section>
+
+<!-- DEBUGGING HISTORY -->
+
+<section class="history-section">
+    <h2>Debugging History</h2>
+
+    <p>View your recent debugging sessions.</p>
+
+    <button onclick="loadDebugHistory()">
+        Refresh History
+    </button>
+
+    <div id="historyStatus">History not loaded yet.</div>
+
+    <div class="history-table-wrapper">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Log File</th>
+                    <th>Target Program</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="historyBody">
+                <tr>
+                    <td colspan="3">Click Refresh History to load sessions.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Linux System Debugging Tool | Team 15
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
